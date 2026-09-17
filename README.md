@@ -20,7 +20,12 @@ and the agent's memory uses SQLite, which comes with Python.
 python -m venv .venv
 source .venv/bin/activate                # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-export GEMINI_API_KEY=your-key           # Windows: set GEMINI_API_KEY=your-key
+# PowerShell (current terminal only):
+$env:GEMINI_API_KEY = "your-key"
+# Optional model override:
+$env:GEMINI_MODEL = "gemini-2.5-flash"
+# Verify that the key is visible before starting the app:
+if (-not $env:GEMINI_API_KEY) { throw "GEMINI_API_KEY is not set" }
 
 pytest tests/test_part1_tools.py         # the sample tools pass already
 python -m scripts.chat --mock            # after Part 2: talk to your agent, no quota
